@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LigasService } from "./ligas.service";
+import { Tab1Service } from "./tab1.service";
 
 
 @Component({
@@ -9,12 +9,12 @@ import { LigasService } from "./ligas.service";
 })
 export class Tab1Page implements OnInit {
 
-  ligas: {};
-  standings:{};
+  ligas: {}
+  standings: {}
   liga : String;
   name: String;
 
-  constructor(private ligaService: LigasService) {}
+  constructor(private ligaService: Tab1Service) {}
 
   ngOnInit() {
 
