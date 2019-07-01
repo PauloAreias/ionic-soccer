@@ -12,12 +12,46 @@
 
 <ion-content padding="50%">
 
-    <ion-button (click)="SelectLiga('PPL')">1ª Liga</ion-button>
-    <ion-button style="margin-left: 1%"  (click)="SelectLiga('CL')">UEFA</ion-button>
-    
+  <ion-row>
+    <ion-col>
 
-    <h2>League Name</h2>
-    <h1>{{ligas.name}}</h1>
+        <ion-button (click)="SelectLiga('PPL')">1ª Liga</ion-button>
+    </ion-col> 
+    <ion-col>
+        <ion-button style="margin-left: 1%"  (click)="SelectLiga('CL')">UEFA</ion-button> 
+    </ion-col>
+  </ion-row>
+
+    
+    <ion-row>
+      <ion-col>
+
+          <h2>League Name: </h2>
+      </ion-col>
+
+      <ion-col>
+          <h3>{{ligas.name}}</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <h1>Location: </h1>
+      </ion-col>
+      <ion-col>
+        <h3>{{ligas.area.name}}</h3>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col>
+          <h1>Standings {{standings.season.startDate | date:'yyyy'}} - {{standings.season.endDate | date:'yyyy'}} :</h1>
+        </ion-col>
+        <ion-col>
+          <h3>{{standings.standings}}</h3>
+        </ion-col>
+      </ion-row>
+  
 
 
   </ion-content>
