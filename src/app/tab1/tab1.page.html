@@ -4,53 +4,95 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Competitions
+        {{ligas.name}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content padding="50%">
+<ion-content >
 
   <ion-row>
     <ion-col>
 
-        <ion-button (click)="SelectLiga('PPL')">1ª Liga</ion-button>
+        <ion-button style="width: 100%"  (click)="SelectLiga('PPL')">1ª Liga</ion-button>
     </ion-col> 
-    <ion-col>
-        <ion-button style="margin-left: 1%"  (click)="SelectLiga('CL')">UEFA</ion-button> 
+    <ion-col align-self: flex-end>
+        <ion-button style="width: 100%"  (click)="SelectLiga('CL')">UEFA</ion-button> 
     </ion-col>
   </ion-row>
 
-    
+    <ion-card>
+ 
     <ion-row>
       <ion-col>
-
-          <h2>League Name: </h2>
+        <h2>Location: </h2>
       </ion-col>
-
       <ion-col>
-          <h3>{{ligas.name}}</h3>
+        <h2>{{ligas.area.name}}</h2>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <h1>Location: </h1>
-      </ion-col>
-      <ion-col>
-        <h3>{{ligas.area.name}}</h3>
+        <h2 style="text-align: center">Season {{standings.season.startDate | date: 'yy'}}/{{standings.season.endDate | date: 'yy'}}: </h2>
       </ion-col>
     </ion-row>
 
     <ion-row>
+      <ion-col>
+
+        <h3>Start Date: {{standings.season.startDate | date: "M/d/yy"}}</h3>
+
+      </ion-col>
+
+      <ion-col>
+          <h3 style="text-align: right">End Date: {{standings.season.endDate | date: "M/d/yy"}}</h3>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card>
+    <h2 style="text-align: center"> Winner {{ligas.seasons[2].startDate | date: 'yy'}}/{{ligas.seasons[2].endDate | date: 'yy'}}: </h2>
+    <ion-img [src]="ligas.seasons[2].winner.crestUrl" style="width: 35%; margin-left: 35%"></ion-img>
+  </ion-card>
+
+    <!-- <ion-row>
         <ion-col>
-          <h1>Standings {{standings.season.startDate | date:'yyyy'}} - {{standings.season.endDate | date:'yyyy'}} :</h1>
+
+            <h1>Standings {{standings.season.startDate | date:'yyyy'}} - {{standings.season.endDate | date:'yyyy'}} :</h1>
+
+          <ion-header-bar>
+            <h2 style="color:#005391" *ngIf="teams.type=== 'TOTAL'">{{teams.group}} </h2> 
+          </ion-header-bar>
+          <ion-content *ngIf="teams.type=== 'TOTAL'">
+            <div *ngFor="let teams of standings.standings">
+            <div class="row header">
+              <div class="col">Position</div>
+              <div class="col">Crest</div>
+              <div class="col">Team</div>
+              <div class="col">Points</div>
+              <div class="col">Games</div>
+              <div class="col">Wins</div>
+              <div class="col">Draws</div>
+              <div class="col">Losts</div>
+              <div class="col">Goals Scored</div>
+              <div class="col">Goals Against</div>
+              <div class="col">Goals Difference</div>
+            </div>
+            <div class="row" *ngFor="let teams2 of teams.table">
+                <div class="col">{{data.name}}</div>
+                <div class="col">{{data.code}}</div>
+                <div class="col">LK {{data.limit}}</div>
+                <div class="col">{{data.account}}</div>
+                <div class="col"><button class="button" ng-click="ctrl.add($index)">Add</button></div>
+            </div>
+          </div>
+          </ion-content>
+
         </ion-col>
-        <ion-col>
-          <h3>{{standings.standings}}</h3>
-        </ion-col>
-      </ion-row>
+
+      </ion-row> -->
   
 
 

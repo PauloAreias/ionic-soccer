@@ -1,1 +1,44 @@
 
+// body {
+//     cursor: url('http://ionicframework.com/img/finger.png'), auto;
+// }
+
+// .ion-col {
+//     background-color:lightgrey;
+// }
+
+// .ion-col {
+//     border: solid 1px grey;
+//     border-bottom-style: none;
+//     border-right-style: none;
+// }
+
+// .ion-col:last-child {
+//     border-right: solid 1px grey;
+// }
+
+// .ion-row:last-child .ion-col {
+//     border-bottom: solid 1px grey;
+// }
+
+.tableFixHead    { overflow-y: auto; height: 100px; }
+.tableFixHead th { position: sticky; top: 0; }
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+}
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+    background: #eee; 
+}
+th { 
+    background: #333; 
+    color: white; 
+    font-weight: bold; 
+}
+td, th { 
+    padding: 6px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+}

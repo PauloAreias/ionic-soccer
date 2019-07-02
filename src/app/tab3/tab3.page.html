@@ -1,9 +1,47 @@
-<ion-header>
+<head></head>
+
+<body>
+  <ion-header>
   <ion-toolbar>
     <ion-title>
-      Teams
+        {{equipas.competition.name}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+    <ion-row>
+        <ion-col>
+    
+            <ion-button style="width: 100%"  (click)="SelectEquipas('PPL')">1ª Liga</ion-button>
+        </ion-col> 
+        <ion-col align-self: flex-end>
+            <ion-button style="width: 100%"  (click)="SelectEquipas('CL')">UEFA</ion-button> 
+        </ion-col>
+      </ion-row>
+
+
+  <ion-row>
+    <ion-col>
+        <div class="tableFixHead" style="overflow-y:scroll; height:480px"> 
+            <table>
+            <thead>
+              <tr>
+                <th >Logo</th>
+                <th >Equipa</th>
+               </tr>
+              </thead>
+              <tbody *ngFor="let teams of equipas.teams">
+                <tr>
+                <td ><img [src]="teams.crestUrl" width="25%" style="margin-right: 2%"></td>
+                <td>{{teams.name}}</td>
+              </tr>
+              </tbody>
+              </table>
+    </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+</body>

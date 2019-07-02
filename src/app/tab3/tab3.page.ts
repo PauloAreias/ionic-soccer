@@ -1,12 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Tab3Service } from "./tab3.service";
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit  {
 
-  constructor() {}
+  equipas: {}
+  liga:String;
+
+  constructor(private equipaService: Tab3Service) { }
+
+
+
+  ngOnInit() {
+
+    this.liga= "PPL";
+
+    this.getCurrentTeams(this.liga);
+ 
+  }
+
+
+  SelectEquipas(liga){
+    this.liga=liga;
+    this.getCurrentTeams(liga);
+}
+
+
+
+getCurrentTeams(Liga){
+
+  this.equipaService.getCurrentTeams(Liga).subscribe(teams => this.equipas = teams);
+}
 
 }

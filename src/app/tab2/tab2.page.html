@@ -1,9 +1,72 @@
+<head></head>
+
+<body>
+
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Matches
+        {{equipas.competition.name}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content >
+
+    <ion-row>
+      <ion-col>
+  
+          <ion-button style="width: 100%"  (click)="SelectEquipas('PPL')">1ª Liga</ion-button>
+      </ion-col> 
+      <ion-col align-self: flex-end>
+          <ion-button style="width: 100%"  (click)="SelectEquipas('CL')">UEFA</ion-button> 
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <div class="tableFixHead" style="overflow-y: scroll; height: 480px">
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Home</th>
+                <th>Score</th>
+                <th>Away</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let jogos of matches.matches">
+              <tr>
+                <td>{{jogos.utcDate | date: 'M/dd/yy'}}</td>
+                <td>{{jogos.homeTeam.name}}</td>
+                <td>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</td>
+                <td>{{jogos.awayTeam.name}}</td>
+                <td>{{jogos.status}}</td>
+              </tr>
+
+            </tbody>
+            </table>
+          </div>
+            <!-- <ion-row>
+              <ion-col>Date</ion-col>
+              <ion-col>Home Team</ion-col>
+              <ion-col>Score</ion-col>
+              <ion-col>Away Team</ion-col>
+              <ion-col>STATUS</ion-col>
+          </ion-row>
+          <hr>
+            <ion-row *ngFor="let jogos of matches.matches">
+              <ion-col>{{jogos.utcDate | date}}</ion-col>
+              <ion-col>{{jogos.homeTeam.name}}</ion-col>
+              <ion-col>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</ion-col>
+              <ion-col>{{jogos.awayTeam.name}}</ion-col>
+              <ion-col>{{jogos.status}}</ion-col>
+            </ion-row> -->
+
+          </ion-col>
+
+          </ion-row>
+    
+</ion-content>
+
+</body>
