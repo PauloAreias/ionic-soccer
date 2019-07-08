@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { Tab1Page } from "./tab1/tab1.page";
-
 const routes: Routes = [
-  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' }
-  //{path:'' , redirectTo : '/ligas', pathMatch: 'full'},
-  //{path:'ligas' , component: Tab1Page},
+  // { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+  { path: 'equipas-info/:id', loadChildren: './equipas-info/equipas-info.module#EquipasInfoPageModule' },
+  { path: 'player/:id', loadChildren: './player/player.module#PlayerPageModule' },
+  { path: 'comments', loadChildren: './comments/comments.module#CommentsPageModule' }
 ];
 @NgModule({
   imports: [

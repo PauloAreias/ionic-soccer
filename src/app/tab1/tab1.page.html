@@ -6,13 +6,29 @@
     <ion-title>
         {{ligas.name}}
     </ion-title>
+    <ion-buttons slot="end">
+    <ion-buttons slot="secondary" (click)="SelectLiga('PPL')">
+        <ion-button>
+
+            <ion-icon slot="icon-only" src="../../assets/Liga_NOS_logo.svg"></ion-icon>
+          
+        </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="secondary" (click)="SelectLiga('CL')">
+        <ion-button>
+            <ion-icon slot="icon-only" src="../../assets/uefa_logo_3.svg"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+  </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content >
 
-  <ion-row>
+  <!-- <ion-row>
     <ion-col>
 
         <ion-button style="width: 100%"  (click)="SelectLiga('PPL')">1ª Liga</ion-button>
@@ -20,7 +36,7 @@
     <ion-col align-self: flex-end>
         <ion-button style="width: 100%"  (click)="SelectLiga('CL')">UEFA</ion-button> 
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
     <ion-card>
  
@@ -52,9 +68,24 @@
     </ion-row>
   </ion-card>
 
-  <ion-card>
-    <h2 style="text-align: center"> Winner {{ligas.seasons[2].startDate | date: 'yy'}}/{{ligas.seasons[2].endDate | date: 'yy'}}: </h2>
-    <ion-img [src]="ligas.seasons[2].winner.crestUrl" style="width: 35%; margin-left: 35%"></ion-img>
+  <ion-card >
+      <ion-row text-center justify-content-center align-self-center>
+          <h2 style="text-align: center"> Winner {{ligas.seasons[2].startDate | date: 'yy'}}/{{ligas.seasons[2].endDate | date: 'yy'}}: </h2>
+      </ion-row>
+      <ion-row text-center justify-content-center align-self-center>
+          
+            <img class="img-team" [src]="ligas.seasons[2].winner.crestUrl" routerLink="/equipas-info/{{ligas.seasons[2].winner.id}}" routerDirection="root">
+            
+      </ion-row>
+      <ion-row text-center justify-content-center align-self-center>
+          <a routerLink="/equipas-info/{{ligas.seasons[2].winner.id}}" routerDirection="root">
+            <h3 style="text-align: center">{{ligas.seasons[2].winner.name}}</h3>
+            </a>
+      </ion-row>
+          
+          
+         
+    
   </ion-card>
 
     <!-- <ion-row>

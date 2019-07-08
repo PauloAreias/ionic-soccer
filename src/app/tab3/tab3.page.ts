@@ -36,4 +36,9 @@ getCurrentTeams(Liga){
   this.equipaService.getCurrentTeams(Liga).subscribe(teams => this.equipas = teams);
 }
 
+onImageError(event){
+  console.log(event);
+  event.target.src="https://www.vermeer.com.au/wp-content/uploads/2016/12/attachment-no-image-available.png";
+}
+
 }

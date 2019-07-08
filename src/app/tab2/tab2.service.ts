@@ -21,13 +21,13 @@ export class Tab2Service {
 
   constructor(private http: HttpClient) { }
 
-  getCurrentMatches(liga){
+  getCurrentMatches(liga, estado){
 
     let headers: HttpHeaders = new HttpHeaders;
 
    headers = headers.append("X-Auth-Token",this.settings.headers["X-Auth-Token"]);
 
-   return this.http.get(this.settings.url + liga + "/matches" + "?status=SCHEDULED,LIVE,FINISHED" , {headers: headers});
+   return this.http.get(this.settings.url + liga + "/matches" + "?status=" + estado , {headers: headers});
   }
 
   getCurrentTeams(liga){

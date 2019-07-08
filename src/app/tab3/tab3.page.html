@@ -6,12 +6,28 @@
     <ion-title>
         {{equipas.competition.name}}
     </ion-title>
+
+    <ion-buttons slot="end">
+    <ion-buttons slot="secondary" (click)="SelectEquipas('PPL')">
+        <ion-button>
+
+            <ion-icon slot="icon-only" src="../../assets/Liga_NOS_logo.svg"></ion-icon>
+          
+        </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="secondary" (click)="SelectEquipas('CL')">
+        <ion-button>
+            <ion-icon slot="icon-only" src="../../assets/uefa_logo_3.svg"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <ion-row>
+    <!-- <ion-row>
         <ion-col>
     
             <ion-button style="width: 100%"  (click)="SelectEquipas('PPL')">1ª Liga</ion-button>
@@ -19,12 +35,12 @@
         <ion-col align-self: flex-end>
             <ion-button style="width: 100%"  (click)="SelectEquipas('CL')">UEFA</ion-button> 
         </ion-col>
-      </ion-row>
+      </ion-row> -->
 
 
   <ion-row>
     <ion-col>
-        <div class="tableFixHead" style="overflow-y:scroll; height:480px"> 
+        <div class="tableFixHead" style="overflow-y:scroll; height:550px"> 
             <table>
             <thead>
               <tr>
@@ -33,9 +49,9 @@
                </tr>
               </thead>
               <tbody *ngFor="let teams of equipas.teams">
-                <tr>
-                <td ><img [src]="teams.crestUrl" width="25%" style="margin-right: 2%"></td>
-                <td>{{teams.name}}</td>
+                <tr> 
+                <td><a routerLink="/equipas-info/{{teams.id}}" routerDirection="root"> <img [src]="teams.crestUrl" width="25%" style="margin-right: 2%" (error)="onImageError($event)"> </a></td>
+                <td><a routerLink="/equipas-info/{{teams.id}}" routerDirection="root"> {{teams.name}}</a></td>
               </tr>
               </tbody>
               </table>
