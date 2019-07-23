@@ -58,7 +58,7 @@ var PlayerPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-menu side=\"start\" id=\"1\">\n    <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu:</ion-title>\n        </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      </ion-content>\n\n      <ion-footer class=\"bar-stable\">\n        <ion-list>\n            <ion-item routerLink=\"/\" >\n              <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n              <ion-label>Home</ion-label>\n          </ion-item>\n        <ion-item routerLink=\"/tabs/tab2\" >\n          <ion-icon name=\"football\" slot=\"start\"></ion-icon>\n          <ion-label>Matches</ion-label>\n        </ion-item>\n        <ion-item routerLink=\"/tabs/tab3\" >\n          <ion-icon name=\"shirt\" slot=\"start\"></ion-icon>\n          <ion-label>Teams</ion-label>\n        </ion-item>\n        </ion-list>\n      </ion-footer>\n  \n    </ion-menu>\n\n\n\n    <div class=\"ion-page\" main>\n    <ion-header>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-back-button defaultHref=\"/\"></ion-back-button>\n        </ion-buttons>\n    <ion-title>{{player.name}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  \n  <ion-row>\n    <ion-col></ion-col>\n    <ion-col>\n        <img src=\"https://www.mikocoffee.com/private-label-and-export/wp-content/uploads/sites/84/2015/01/person-miko.png\" width=\"100%\">\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n      First Name: {{player.firstName}}\n      <hr>\n      Age: {{getSubString(player.dateOfBirth | date: 'yyyy')}}\n      <hr>\n      Position: {{player.position}}\n    </ion-col>\n    <ion-col>\n        Country Of Birth: {{player.countryOfBirth}}\n        <hr>\n        Nationality: {{player.nationality}}\n        <hr>\n        Shirt Number: {{player.shirtNumber}}\n    </ion-col>\n  </ion-row>\n\n</ion-content>\n</div>\n"
+module.exports = "<ion-menu side=\"start\" >\n    <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu:</ion-title>\n        </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      </ion-content>\n\n      <ion-footer class=\"bar-stable\">\n        <ion-list>\n            <h2>HomeScreen:</h2>\n            <ion-item routerLink=\"/\" >\n              <ion-icon name=\"home\" slot=\"start\"></ion-icon>\n              <ion-label>Home</ion-label>\n          </ion-item>\n        <ion-item routerLink=\"/tabs/tab2\" >\n          <ion-icon name=\"football\" slot=\"start\"></ion-icon>\n          <ion-label>Matches</ion-label>\n        </ion-item>\n        <ion-item routerLink=\"/tabs/tab3\" >\n          <ion-icon name=\"shirt\" slot=\"start\"></ion-icon>\n          <ion-label>Teams</ion-label>\n        </ion-item>\n        <ion-item routerLink=\"/tabs/tab4\" >\n          <ion-icon name=\"chatboxes\" slot=\"start\"></ion-icon>\n          <ion-label>Comments</ion-label>\n        </ion-item>\n        </ion-list>\n      </ion-footer>\n  \n    </ion-menu>\n\n\n\n    <div class=\"ion-page\" main>\n    <ion-header>\n    <ion-toolbar>\n      <ion-buttons slot=\"start\">\n          <ion-menu-button></ion-menu-button>\n        </ion-buttons>\n        <ion-buttons slot=\"end\">\n            <ion-back-button defaultHref=\"\"></ion-back-button>\n        </ion-buttons>\n    <ion-title>{{player.name}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  \n  <ion-row>\n    <ion-col></ion-col>\n    <ion-col>\n        <img src=\"https://www.mikocoffee.com/private-label-and-export/wp-content/uploads/sites/84/2015/01/person-miko.png\" width=\"100%\">\n    </ion-col>\n    <ion-col></ion-col>\n  </ion-row>\n  <ion-row>\n    <ion-col>\n       Name: {{player.firstName}} {{player.lastName}}\n      <hr>\n      Age: {{getSubString(player.dateOfBirth | date: 'yyyy')}}\n      <hr>\n      Position: {{player.position}}\n    </ion-col>\n    <ion-col>\n        POB: {{player.countryOfBirth}}\n        <hr>\n        Nationality: {{player.nationality}}\n        <hr>\n        Shirt Number: {{player.shirtNumber}}\n    </ion-col>\n  </ion-row>\n\n</ion-content>\n</div>\n"
 
 /***/ }),
 
@@ -87,14 +87,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _player_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./player.service */ "./src/app/player/player.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
 
 
 
 
 var PlayerPage = /** @class */ (function () {
-    function PlayerPage(route, PlayerService) {
+    function PlayerPage(route, PlayerService, AlertController, navCtrl) {
         this.route = route;
         this.PlayerService = PlayerService;
+        this.AlertController = AlertController;
+        this.navCtrl = navCtrl;
     }
     PlayerPage.prototype.ngOnInit = function () {
         this.id = "3174";
@@ -106,7 +110,9 @@ var PlayerPage = /** @class */ (function () {
         if (jogadores != null) {
             this.id = jogadores;
         }
-        this.PlayerService.getPlayers(this.id).subscribe(function (playerinfo) { return _this.player = playerinfo; });
+        this.PlayerService.getPlayers(this.id).subscribe(function (response) { _this.player = response; }, function (error) {
+            _this.onIonError();
+        });
     };
     PlayerPage.prototype.getSubString = function (AnoNascimento) {
         var ano = AnoNascimento.substr(0, 4);
@@ -115,6 +121,25 @@ var PlayerPage = /** @class */ (function () {
         var age = today_year - ano;
         return age;
     };
+    PlayerPage.prototype.onIonError = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var errorAlert;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.AlertController.create({
+                            message: "Não será possível carregar os dados da API nos próximos momentos",
+                            buttons: [{ text: "Fechar" }]
+                        })];
+                    case 1:
+                        errorAlert = _a.sent();
+                        return [4 /*yield*/, errorAlert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     PlayerPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-player',
@@ -122,7 +147,9 @@ var PlayerPage = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./player.page.scss */ "./src/app/player/player.page.scss")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
-            _player_service__WEBPACK_IMPORTED_MODULE_2__["PlayerService"]])
+            _player_service__WEBPACK_IMPORTED_MODULE_2__["PlayerService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"]])
     ], PlayerPage);
     return PlayerPage;
 }());

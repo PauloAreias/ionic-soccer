@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { EquipasInfoService } from "./equipas-info.service";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 
 @Component({
@@ -18,7 +19,10 @@ export class EquipasInfoPage implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private InfoService: EquipasInfoService,
-    private menuCtrl: MenuController) { }
+    private menuCtrl: MenuController,
+    private router: Router
+    , private AlertController: AlertController, 
+    public navCtrl: NavController) { }
 
   ngOnInit() {
 
@@ -37,7 +41,11 @@ export class EquipasInfoPage implements OnInit {
       this.id= team;
     }
 
-    this.InfoService.getInfoTeams(this.id).subscribe(infoteam => this.info = infoteam);
+    this.InfoService.getInfoTeams(this.id).subscribe(response => {this.info = response},
+      error => { 
+        this.onIonError();
+      }
+    );
   }
 
   onImageError(event){
@@ -50,10 +58,6 @@ export class EquipasInfoPage implements OnInit {
 
   }
 
-  onNumberError(event){
-    console.log(event);
-    event.target= "?";
-  }
 
   openMenu() {
     this.menuCtrl.open();
@@ -66,6 +70,18 @@ export class EquipasInfoPage implements OnInit {
  
   toggleMenu() {
     this.menuCtrl.toggle();
+  }
+
+  startMenu(){
+    this.menuCtrl.isEnabled();
+  }
+  
+  async onIonError(){
+    const errorAlert =await  this.AlertController.create({
+      message:"Não será possível carregar os dados da API nos próximos momentos",
+      buttons:[{text:"Fechar"}]
+    });
+    await errorAlert.present()
   }
 
 }

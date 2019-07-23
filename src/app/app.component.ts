@@ -9,6 +9,18 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+  public appPages = [
+    {
+      title: 'Primeira Liga',
+      url: '/app-tab1',
+      icon: '/assets/Liga_NOS_logo.svg'
+    },
+    {
+      title: 'UEFA',
+      url: '/uefa',
+      icon: '/assets/uefa_logo_3.svg'
+    }
+  ];
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

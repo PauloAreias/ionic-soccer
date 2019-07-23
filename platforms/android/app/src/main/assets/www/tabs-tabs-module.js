@@ -52,7 +52,7 @@ var TabsPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\" style=\"background: #243447\">\n    <ion-tab-button tab=\"tab1\" style=\"background: #243447\">\n      <ion-icon name=\"Home\"></ion-icon>\n      <ion-label>Home</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\" style=\"background: #243447\">\n      <ion-icon name=\"football\"></ion-icon>\n      <ion-label>Matches</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\" style=\"background: #243447\">\n      <ion-icon name=\"shirt\"></ion-icon>\n      <ion-label>Teams</ion-label>\n    </ion-tab-button>\n  </ion-tab-bar>\n\n</ion-tabs>\n"
+module.exports = "<ion-tabs>\n\n  <ion-tab-bar slot=\"bottom\" style=\"background: #243447\">\n    <ion-tab-button tab=\"tab1\" style=\"background: #243447\">\n      <ion-icon name=\"Home\"></ion-icon>\n      <ion-label>Home</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab2\" style=\"background: #243447\">\n      <ion-icon name=\"football\"></ion-icon>\n      <ion-label>Matches</ion-label>\n    </ion-tab-button>\n\n    <ion-tab-button tab=\"tab3\" style=\"background: #243447\">\n      <ion-icon name=\"shirt\"></ion-icon>\n      <ion-label>Teams</ion-label>\n    </ion-tab-button>\n  \n\n   <ion-tab-button tab=\"tab4\" style=\"background: #243447\">\n      <ion-icon name=\"chatboxes\"></ion-icon>\n      <ion-label>Comments</ion-label>\n    </ion-tab-button>\n\n</ion-tab-bar>\n\n</ion-tabs>\n"
 
 /***/ }),
 
@@ -146,6 +146,15 @@ var routes = [
                     {
                         path: '',
                         loadChildren: '../tab3/tab3.module#Tab3PageModule'
+                    }
+                ]
+            },
+            {
+                path: 'tab4',
+                children: [
+                    {
+                        path: '',
+                        loadChildren: '../comments/comments.module#CommentsPageModule'
                     }
                 ]
             },

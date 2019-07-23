@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tab1Service } from "./tab1.service";
+import { MenuController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 
 @Component({
@@ -14,7 +16,10 @@ export class Tab1Page implements OnInit {
   liga : String;
   name: String;
 
-  constructor(private ligaService: Tab1Service) {}
+  constructor(private ligaService: Tab1Service,
+    private menuCtrl: MenuController
+    , private AlertController: AlertController, 
+    public navCtrl: NavController) {}
 
   ngOnInit() {
 
@@ -39,14 +44,36 @@ export class Tab1Page implements OnInit {
 
   getCurrentLiga(liga){
 
-    this.ligaService.getCurrentLiga(liga).subscribe(league => this.ligas = league);
+    this.ligaService.getCurrentLiga(liga).subscribe(response => {this.ligas = response},
+      error => { 
+        this.onIonError();
+      }
+    );
   }
 
 
 
 getCurrentStandings(Liga){
 
-    this.ligaService.getCurrentStandings(Liga).subscribe(teams => this.standings = teams);
+    this.ligaService.getCurrentStandings(Liga).subscribe(response => {this.standings = response},
+      error => { 
+        this.onIonError();
+      }
+    );
   }
+
+  closeMenu() {
+    this.menuCtrl.close();
+  }
+
+  async onIonError(){
+    const errorAlert =await  this.AlertController.create({
+      message:"Não será possível carregar os dados da API nos próximos momentos",
+      buttons:[{text:"Fechar"}]
+    });
+    await errorAlert.present()
+  }
+
+  
 
 }

@@ -52,7 +52,7 @@ var Tab3PageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<head></head>\n\n<body>\n  <ion-header>\n  <ion-toolbar>\n    <ion-title>\n        {{equipas.competition.name}}\n    </ion-title>\n\n    <ion-buttons slot=\"end\">\n    <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('PPL')\">\n        <ion-button>\n\n            <ion-icon slot=\"icon-only\" src=\"../../assets/Liga_NOS_logo.svg\"></ion-icon>\n          \n        </ion-button>\n    </ion-buttons>\n\n    <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('CL')\">\n        <ion-button>\n            <ion-icon slot=\"icon-only\" src=\"../../assets/uefa_logo_3.svg\"></ion-icon>\n        </ion-button>\n    </ion-buttons>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n    <!-- <ion-row>\n        <ion-col>\n    \n            <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('PPL')\">1ª Liga</ion-button>\n        </ion-col> \n        <ion-col align-self: flex-end>\n            <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('CL')\">UEFA</ion-button> \n        </ion-col>\n      </ion-row> -->\n\n\n  <ion-row>\n    <ion-col>\n        <div class=\"tableFixHead\" style=\"overflow-y:scroll; height:550px\"> \n            <table>\n            <thead>\n              <tr>\n                <th >Logo</th>\n                <th >Equipa</th>\n               </tr>\n              </thead>\n              <tbody *ngFor=\"let teams of equipas.teams\">\n                <tr> \n                <td><a routerLink=\"/equipas-info/{{teams.id}}\" routerDirection=\"root\"> <img [src]=\"teams.crestUrl\" width=\"25%\" style=\"margin-right: 2%\" (error)=\"onImageError($event)\"> </a></td>\n                <td><a routerLink=\"/equipas-info/{{teams.id}}\" routerDirection=\"root\"> {{teams.name}}</a></td>\n              </tr>\n              </tbody>\n              </table>\n    </div>\n    </ion-col>\n  </ion-row>\n</ion-content>\n\n</body>\n"
+module.exports = "<head></head>\n\n<body>\n    <ion-menu side=\"start\">\n        <ion-header>\n            <ion-toolbar>\n              <ion-title>Menu:</ion-title>\n            </ion-toolbar>\n        </ion-header>\n        <ion-content>\n          <ion-list>\n              <h2>Leagues:</h2>\n              <ion-item (click)=\"SelectEquipas('PPL'); closeMenu()\" >\n                  <ion-icon slot=\"start\" src=\"../../assets/Liga_NOS_logo.svg\"></ion-icon>\n                  <ion-label>Primeira Liga</ion-label>\n                </ion-item>\n                <ion-item (click)=\"SelectEquipas('CL'); closeMenu()\" >\n                    <ion-icon slot=\"start\" src=\"../../assets/uefa_logo_3.svg\"></ion-icon>\n                    <ion-label>Uefa Champions League</ion-label>\n                  </ion-item>\n          </ion-list>\n        </ion-content>\n      </ion-menu>\n\n  <div class=\"ion-page\" main>\n  <ion-header>\n  <ion-toolbar>\n    <ion-title>\n        {{equipas.competition.name}}\n    </ion-title>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    <!-- <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('PPL')\">\n        <ion-button>\n\n            <ion-icon slot=\"icon-only\" src=\"../../assets/Liga_NOS_logo.svg\"></ion-icon>\n          \n        </ion-button>\n    </ion-buttons>\n\n    <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('CL')\">\n        <ion-button>\n            <ion-icon slot=\"icon-only\" src=\"../../assets/uefa_logo_3.svg\"></ion-icon>\n        </ion-button>\n    </ion-buttons> -->\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n    <!-- <ion-row>\n        <ion-col>\n    \n            <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('PPL')\">1ª Liga</ion-button>\n        </ion-col> \n        <ion-col align-self: flex-end>\n            <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('CL')\">UEFA</ion-button> \n        </ion-col>\n      </ion-row> -->\n\n\n  <ion-row>\n    <ion-col>\n        <div class=\"tableFixHead\" style=\"overflow-y:scroll; height:550px\"> \n            <table>\n            <thead>\n              <tr>\n                <th >Logo</th>\n                <th >Equipa</th>\n               </tr>\n              </thead>\n              <tbody *ngFor=\"let teams of equipas.teams\">\n                <tr> \n                <td><a routerLink=\"/equipas-info/{{teams.id}}\" routerDirection=\"root\"> <img [src]=\"teams.crestUrl\" width=\"25%\" style=\"margin-right: 2%\" (error)=\"onImageError($event)\"> </a></td>\n                <td><a routerLink=\"/equipas-info/{{teams.id}}\" routerDirection=\"root\"> {{teams.name}}</a></td>\n              </tr>\n              </tbody>\n              </table>\n    </div>\n    </ion-col>\n  </ion-row>\n</ion-content>\n\n</div>\n\n</body>\n"
 
 /***/ }),
 
@@ -80,12 +80,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _tab3_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tab3.service */ "./src/app/tab3/tab3.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
 
 
 
 var Tab3Page = /** @class */ (function () {
-    function Tab3Page(equipaService) {
+    function Tab3Page(equipaService, menuCtrl, AlertController, navCtrl) {
         this.equipaService = equipaService;
+        this.menuCtrl = menuCtrl;
+        this.AlertController = AlertController;
+        this.navCtrl = navCtrl;
     }
     Tab3Page.prototype.ngOnInit = function () {
         this.liga = "PPL";
@@ -97,11 +103,35 @@ var Tab3Page = /** @class */ (function () {
     };
     Tab3Page.prototype.getCurrentTeams = function (Liga) {
         var _this = this;
-        this.equipaService.getCurrentTeams(Liga).subscribe(function (teams) { return _this.equipas = teams; });
+        this.equipaService.getCurrentTeams(Liga).subscribe(function (response) { _this.equipas = response; }, function (error) {
+            _this.onIonError();
+        });
     };
     Tab3Page.prototype.onImageError = function (event) {
         console.log(event);
         event.target.src = "https://www.vermeer.com.au/wp-content/uploads/2016/12/attachment-no-image-available.png";
+    };
+    Tab3Page.prototype.closeMenu = function () {
+        this.menuCtrl.close();
+    };
+    Tab3Page.prototype.onIonError = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var errorAlert;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.AlertController.create({
+                            message: "Não será possível carregar os dados da API nos próximos momentos",
+                            buttons: [{ text: "Fechar" }]
+                        })];
+                    case 1:
+                        errorAlert = _a.sent();
+                        return [4 /*yield*/, errorAlert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     Tab3Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -109,7 +139,10 @@ var Tab3Page = /** @class */ (function () {
             template: __webpack_require__(/*! ./tab3.page.html */ "./src/app/tab3/tab3.page.html"),
             styles: [__webpack_require__(/*! ./tab3.page.scss */ "./src/app/tab3/tab3.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_tab3_service__WEBPACK_IMPORTED_MODULE_2__["Tab3Service"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_tab3_service__WEBPACK_IMPORTED_MODULE_2__["Tab3Service"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]])
     ], Tab3Page);
     return Tab3Page;
 }());

@@ -28,9 +28,11 @@ export class CommentsPage implements OnInit {
 
 
   addParagraph(nome: string, texto: string){
+    if(this.text!=''){
     this.dataPL.paragraphs.push( { "name": nome, "text": texto});
    this.text="";
    this.name="";
+    } 
   }
 
 }

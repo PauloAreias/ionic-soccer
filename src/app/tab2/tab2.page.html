@@ -6,6 +6,18 @@
     </ion-header>
     <ion-content>
       <ion-list>
+          <h2>Leagues:</h2>
+          <ion-item (click)="SelectEquipas('PPL'); closeMenu()" >
+              <ion-icon slot="start" src="../../assets/Liga_NOS_logo.svg"></ion-icon>
+              <ion-label>Primeira Liga</ion-label>
+            </ion-item>
+            <ion-item (click)="SelectEquipas('CL'); closeMenu()" >
+                <ion-icon slot="start" src="../../assets/uefa_logo_3.svg"></ion-icon>
+                <ion-label>Uefa Champions League</ion-label>
+              </ion-item>
+              <hr>
+              <hr>
+              <ion-title>Options:</ion-title>
           <ion-item (click)="SelectStatus('LIVE'); closeMenu()" >
               <ion-icon name="videocam" slot="start"></ion-icon>
               <ion-label>Live</ion-label>
@@ -36,7 +48,7 @@
         <ion-menu-button ></ion-menu-button>
       </ion-buttons>
 
-    <ion-buttons slot="end">
+    <!-- <ion-buttons slot="end">
     <ion-buttons slot="secondary" (click)="SelectEquipas('PPL')">
         <ion-button>
 
@@ -50,7 +62,7 @@
             <ion-icon slot="icon-only" src="../../assets/uefa_logo_3.svg"></ion-icon>
         </ion-button>
     </ion-buttons>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 

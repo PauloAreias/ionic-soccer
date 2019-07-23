@@ -52,7 +52,7 @@ var Tab2PageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-menu side=\"start\">\n    <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu:</ion-title>\n        </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-list>\n          <ion-item (click)=\"SelectStatus('LIVE')\" >\n              <ion-icon name=\"videocam\" slot=\"start\"></ion-icon>\n              <ion-label>Live</ion-label>\n          </ion-item>\n        <ion-item (click)=\"SelectStatus('SCHEDULED')\" >\n          <ion-icon name=\"calendar\" slot=\"start\"></ion-icon>\n          <ion-label>Schedule</ion-label>\n        </ion-item>\n        <ion-item (click)=\"SelectStatus('FINISHED')\" >\n          <ion-icon name=\"checkmark-circle\" slot=\"start\"></ion-icon>\n          <ion-label>Finished</ion-label>\n        </ion-item>\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n\n\n\n<div class=\"ion-page\" main>\n\n<ion-header>\n  <ion-toolbar>\n    <ion-title>\n        {{equipas.competition.name}}\n    </ion-title>\n\n    <ion-buttons slot=\"start\">\n        <ion-menu-button></ion-menu-button>\n      </ion-buttons>\n\n    <ion-buttons slot=\"end\">\n    <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('PPL')\">\n        <ion-button>\n\n            <ion-icon slot=\"icon-only\" src=\"../../assets/Liga_NOS_logo.svg\"></ion-icon>\n          \n        </ion-button>\n    </ion-buttons>\n\n    <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('CL')\">\n        <ion-button>\n            <ion-icon slot=\"icon-only\" src=\"../../assets/uefa_logo_3.svg\"></ion-icon>\n        </ion-button>\n    </ion-buttons>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content >\n\n    <!-- <ion-row>\n      <ion-col>\n  \n          <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('PPL')\">1ª Liga</ion-button>\n      </ion-col> \n      <ion-col align-self: flex-end>\n          <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('CL')\">UEFA</ion-button> \n      </ion-col>\n    </ion-row> -->\n\n    <ion-row>\n      <ion-col>\n\n        <h2 style=\"text-align: center\">\n          {{estado}}\n        </h2>\n        <div *ngIf =\"estado == 'SCHEDULED'\">\n\n            <div class=\"tableFixHead\" style=\"overflow-y: scroll; height: 450px\">\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Date</th>\n                      <th>Home</th>\n                      <th>Away</th>\n                    </tr>\n                  </thead>\n                  <tbody *ngFor=\"let jogos of matches.matches\">\n                    <tr>\n                      <td>{{jogos.utcDate | date: 'M/dd/yy'}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.homeTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.homeTeam.name}}</a>\n                      </td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.awayTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.awayTeam.name}}\n                      </a>\n                    \n      \n                  </tbody>\n                  </table>\n                </div>\n\n        </div>\n         \n\n\n        <div *ngIf =\"estado == 'FINISHED'\">\n\n            <div class=\"tableFixHead\" style=\"overflow-y: scroll; height: 450px\">\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Date</th>\n                      <th>Home</th>\n                      <th>Score</th>\n                      <th>Away</th>\n                    </tr>\n                  </thead>\n                  <tbody *ngFor=\"let jogos of matches.matches\">\n                    <tr>\n                      <td>{{jogos.utcDate | date: 'M/dd/yy'}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.homeTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.homeTeam.name}}</a>\n                      </td>\n                      <td>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.awayTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.awayTeam.name}}\n                      </a>\n                    \n      \n                  </tbody>\n                  </table>\n                </div>\n\n        </div>\n\n        <div *ngIf =\"estado == 'LIVE'\">\n\n            <div class=\"tableFixHead\" style=\"overflow-y: scroll; height: 450px\">\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Home</th>\n                      <th>Score</th>\n                      <th>Away</th>\n                    </tr>\n                  </thead>\n                  <tbody *ngFor=\"let jogos of matches.matches\">\n                    <tr>\n                     \n                      <td><a routerLink=\"/equipas-info/{{jogos.homeTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.homeTeam.name}}</a>\n                      </td>\n                      <td>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.awayTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.awayTeam.name}}\n                      </a>\n                    \n      \n                  </tbody>\n                  </table>\n                </div>\n\n        </div>\n\n        \n            <!-- <ion-row>\n              <ion-col>Date</ion-col>\n              <ion-col>Home Team</ion-col>\n              <ion-col>Score</ion-col>\n              <ion-col>Away Team</ion-col>\n              <ion-col>STATUS</ion-col>\n          </ion-row>\n          <hr>\n            <ion-row *ngFor=\"let jogos of matches.matches\">\n              <ion-col>{{jogos.utcDate | date}}</ion-col>\n              <ion-col>{{jogos.homeTeam.name}}</ion-col>\n              <ion-col>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</ion-col>\n              <ion-col>{{jogos.awayTeam.name}}</ion-col>\n              <ion-col>{{jogos.status}}</ion-col>\n            </ion-row> -->\n\n          </ion-col>\n\n          </ion-row>\n    \n</ion-content>\n</div>\n\n"
+module.exports = "<ion-menu side=\"start\">\n    <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu:</ion-title>\n        </ion-toolbar>\n    </ion-header>\n    <ion-content>\n      <ion-list>\n          <h2>Leagues:</h2>\n          <ion-item (click)=\"SelectEquipas('PPL'); closeMenu()\" >\n              <ion-icon slot=\"start\" src=\"../../assets/Liga_NOS_logo.svg\"></ion-icon>\n              <ion-label>Primeira Liga</ion-label>\n            </ion-item>\n            <ion-item (click)=\"SelectEquipas('CL'); closeMenu()\" >\n                <ion-icon slot=\"start\" src=\"../../assets/uefa_logo_3.svg\"></ion-icon>\n                <ion-label>Uefa Champions League</ion-label>\n              </ion-item>\n              <hr>\n              <hr>\n              <ion-title>Options:</ion-title>\n          <ion-item (click)=\"SelectStatus('LIVE'); closeMenu()\" >\n              <ion-icon name=\"videocam\" slot=\"start\"></ion-icon>\n              <ion-label>Live</ion-label>\n          </ion-item>\n        <ion-item (click)=\"SelectStatus('SCHEDULED'); closeMenu()\" >\n          <ion-icon name=\"calendar\" slot=\"start\"></ion-icon>\n          <ion-label>Schedule</ion-label>\n        </ion-item>\n        <ion-item (click)=\"SelectStatus('FINISHED'); closeMenu()\" >\n          <ion-icon name=\"checkmark-circle\" slot=\"start\"></ion-icon>\n          <ion-label>Finished</ion-label>\n        </ion-item>\n      </ion-list>\n    </ion-content>\n  </ion-menu>\n\n\n\n<div class=\"ion-page\" main>\n\n<ion-header>\n  <ion-toolbar>\n    <ion-title>\n        {{equipas.competition.name}}\n    </ion-title>\n\n    <ion-buttons slot=\"start\">\n        <ion-menu-button ></ion-menu-button>\n      </ion-buttons>\n\n    <!-- <ion-buttons slot=\"end\">\n    <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('PPL')\">\n        <ion-button>\n\n            <ion-icon slot=\"icon-only\" src=\"../../assets/Liga_NOS_logo.svg\"></ion-icon>\n          \n        </ion-button>\n    </ion-buttons>\n\n    <ion-buttons slot=\"secondary\" (click)=\"SelectEquipas('CL')\">\n        <ion-button>\n            <ion-icon slot=\"icon-only\" src=\"../../assets/uefa_logo_3.svg\"></ion-icon>\n        </ion-button>\n    </ion-buttons>\n    </ion-buttons> -->\n  </ion-toolbar>\n</ion-header>\n\n<ion-content >\n\n    <!-- <ion-row>\n      <ion-col>\n  \n          <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('PPL')\">1ª Liga</ion-button>\n      </ion-col> \n      <ion-col align-self: flex-end>\n          <ion-button style=\"width: 100%\"  (click)=\"SelectEquipas('CL')\">UEFA</ion-button> \n      </ion-col>\n    </ion-row> -->\n\n    <ion-row>\n      <ion-col>\n\n        <h2 style=\"text-align: center\">\n          {{estado}}\n        </h2>\n        <div *ngIf =\"estado == 'SCHEDULED'\">\n\n            <div class=\"tableFixHead\" style=\"overflow-y: scroll; height: 450px\">\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Date</th>\n                      <th>Home</th>\n                      <th>Away</th>\n                    </tr>\n                  </thead>\n                  <tbody *ngFor=\"let jogos of matches.matches\">\n                    <tr>\n                      <td>{{jogos.utcDate | date: 'M/dd/yy'}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.homeTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.homeTeam.name}}</a>\n                      </td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.awayTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.awayTeam.name}}\n                      </a>\n                    \n      \n                  </tbody>\n                  </table>\n                </div>\n\n        </div>\n         \n\n\n        <div *ngIf =\"estado == 'FINISHED'\">\n\n            <div class=\"tableFixHead\" style=\"overflow-y: scroll; height: 450px\">\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Date</th>\n                      <th>Home</th>\n                      <th>Score</th>\n                      <th>Away</th>\n                    </tr>\n                  </thead>\n                  <tbody *ngFor=\"let jogos of matches.matches\">\n                    <tr>\n                      <td>{{jogos.utcDate | date: 'M/dd/yy'}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.homeTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.homeTeam.name}}</a>\n                      </td>\n                      <td>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.awayTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.awayTeam.name}}\n                      </a>\n                    \n      \n                  </tbody>\n                  </table>\n                </div>\n\n        </div>\n\n        <div *ngIf =\"estado == 'LIVE'\">\n\n            <div class=\"tableFixHead\" style=\"overflow-y: scroll; height: 450px\">\n                <table>\n                  <thead>\n                    <tr>\n                      <th>Home</th>\n                      <th>Score</th>\n                      <th>Away</th>\n                    </tr>\n                  </thead>\n                  <tbody *ngFor=\"let jogos of matches.matches\">\n                    <tr>\n                     \n                      <td><a routerLink=\"/equipas-info/{{jogos.homeTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.homeTeam.name}}</a>\n                      </td>\n                      <td>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</td>\n                      <td><a routerLink=\"/equipas-info/{{jogos.awayTeam.id}}\" routerDirection=\"root\">\n                        {{jogos.awayTeam.name}}\n                      </a>\n                    \n      \n                  </tbody>\n                  </table>\n                </div>\n\n        </div>\n\n        \n            <!-- <ion-row>\n              <ion-col>Date</ion-col>\n              <ion-col>Home Team</ion-col>\n              <ion-col>Score</ion-col>\n              <ion-col>Away Team</ion-col>\n              <ion-col>STATUS</ion-col>\n          </ion-row>\n          <hr>\n            <ion-row *ngFor=\"let jogos of matches.matches\">\n              <ion-col>{{jogos.utcDate | date}}</ion-col>\n              <ion-col>{{jogos.homeTeam.name}}</ion-col>\n              <ion-col>{{jogos.score.fullTime.homeTeam}} - {{jogos.score.fullTime.awayTeam}}</ion-col>\n              <ion-col>{{jogos.awayTeam.name}}</ion-col>\n              <ion-col>{{jogos.status}}</ion-col>\n            </ion-row> -->\n\n          </ion-col>\n\n          </ion-row>\n    \n</ion-content>\n</div>\n\n"
 
 /***/ }),
 
@@ -80,12 +80,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _tab2_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tab2.service */ "./src/app/tab2/tab2.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
 
 
 
 var Tab2Page = /** @class */ (function () {
-    function Tab2Page(equipaService) {
+    function Tab2Page(equipaService, menuCtrl, AlertController, navCtrl) {
         this.equipaService = equipaService;
+        this.menuCtrl = menuCtrl;
+        this.AlertController = AlertController;
+        this.navCtrl = navCtrl;
     }
     Tab2Page.prototype.ngOnInit = function () {
         this.liga = "CL";
@@ -104,11 +110,47 @@ var Tab2Page = /** @class */ (function () {
     };
     Tab2Page.prototype.getCurrentMatches = function (Liga, estado) {
         var _this = this;
-        this.equipaService.getCurrentMatches(Liga, estado).subscribe(function (matches) { return _this.matches = matches; });
+        this.equipaService.getCurrentMatches(Liga, estado).subscribe(function (response) { _this.matches = response; }, function (error) {
+            _this.onIonError();
+        });
     };
     Tab2Page.prototype.getCurrentTeams = function (Liga) {
         var _this = this;
-        this.equipaService.getCurrentTeams(Liga).subscribe(function (teams) { return _this.equipas = teams; });
+        this.equipaService.getCurrentTeams(Liga).subscribe(function (response) { _this.equipas = response; }, function (error) {
+            _this.onIonError();
+        });
+    };
+    Tab2Page.prototype.onNumberError = function (event) {
+        console.log(event);
+        event.target = "?";
+    };
+    Tab2Page.prototype.openMenu = function () {
+        this.menuCtrl.open();
+    };
+    Tab2Page.prototype.closeMenu = function () {
+        this.menuCtrl.close();
+    };
+    Tab2Page.prototype.toggleMenu = function () {
+        this.menuCtrl.toggle();
+    };
+    Tab2Page.prototype.onIonError = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var errorAlert;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.AlertController.create({
+                            message: "Não será possível carregar os dados da API nos próximos momentos",
+                            buttons: [{ text: "Fechar" }]
+                        })];
+                    case 1:
+                        errorAlert = _a.sent();
+                        return [4 /*yield*/, errorAlert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     Tab2Page = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -116,7 +158,10 @@ var Tab2Page = /** @class */ (function () {
             template: __webpack_require__(/*! ./tab2.page.html */ "./src/app/tab2/tab2.page.html"),
             styles: [__webpack_require__(/*! ./tab2.page.scss */ "./src/app/tab2/tab2.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_tab2_service__WEBPACK_IMPORTED_MODULE_2__["Tab2Service"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_tab2_service__WEBPACK_IMPORTED_MODULE_2__["Tab2Service"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"]])
     ], Tab2Page);
     return Tab2Page;
 }());

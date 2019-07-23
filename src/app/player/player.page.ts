@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from "./player.service";
 import { ActivatedRoute } from '@angular/router';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-player',
@@ -13,7 +14,9 @@ export class PlayerPage implements OnInit {
   id: String
 
   constructor(private route: ActivatedRoute,
-    private PlayerService : PlayerService ) { }
+    private PlayerService : PlayerService
+    , private AlertController: AlertController, 
+    public navCtrl: NavController ) { }
 
   ngOnInit() {
 
@@ -33,7 +36,11 @@ export class PlayerPage implements OnInit {
       this.id= jogadores;
     }
 
-    this.PlayerService.getPlayers(this.id).subscribe(playerinfo => this.player = playerinfo);
+    this.PlayerService.getPlayers(this.id).subscribe(response => {this.player = response},
+      error => { 
+        this.onIonError();
+      }
+    );
   }
 
   getSubString(AnoNascimento){
@@ -49,4 +56,11 @@ export class PlayerPage implements OnInit {
 
   }
 
+  async onIonError(){
+    const errorAlert =await  this.AlertController.create({
+      message:"Não será possível carregar os dados da API nos próximos momentos",
+      buttons:[{text:"Fechar"}]
+    });
+    await errorAlert.present()
+  }
 }

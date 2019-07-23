@@ -432,6 +432,10 @@ module.exports = webpackAsyncContext;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"../comments/comments.module": [
+		"./src/app/comments/comments.module.ts",
+		"comments-comments-module"
+	],
 	"../tab1/tab1.module": [
 		"./src/app/tab1/tab1.module.ts",
 		"tab1-tab1-module"
@@ -443,6 +447,10 @@ var map = {
 	"../tab3/tab3.module": [
 		"./src/app/tab3/tab3.module.ts",
 		"tab3-tab3-module"
+	],
+	"./comments/comments.module": [
+		"./src/app/comments/comments.module.ts",
+		"comments-comments-module"
 	],
 	"./equipas-info/equipas-info.module": [
 		"./src/app/equipas-info/equipas-info.module.ts",
@@ -498,8 +506,10 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [
     // { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+    { path: 'equipas-info', loadChildren: './equipas-info/equipas-info.module#EquipasInfoPageModule' },
     { path: 'equipas-info/:id', loadChildren: './equipas-info/equipas-info.module#EquipasInfoPageModule' },
-    { path: 'player/:id', loadChildren: './player/player.module#PlayerPageModule' }
+    { path: 'player/:id', loadChildren: './player/player.module#PlayerPageModule' },
+    { path: 'comments', loadChildren: './comments/comments.module#CommentsPageModule' }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {
@@ -526,7 +536,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-router-outlet></ion-router-outlet>\n</ion-app>\n"
+module.exports = "<ion-app>\n  <!-- <ion-router-outlet></ion-router-outlet> -->\n  <ion-split-pane>\n    <ion-menu type=\"overlay\">\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n"
 
 /***/ }),
 
@@ -555,6 +565,18 @@ var AppComponent = /** @class */ (function () {
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
+        this.appPages = [
+            {
+                title: 'Primeira Liga',
+                url: '/app-tab1',
+                icon: '/assets/Liga_NOS_logo.svg'
+            },
+            {
+                title: 'UEFA',
+                url: '/uefa',
+                icon: '/assets/uefa_logo_3.svg'
+            }
+        ];
         this.initializeApp();
     }
     AppComponent.prototype.initializeApp = function () {

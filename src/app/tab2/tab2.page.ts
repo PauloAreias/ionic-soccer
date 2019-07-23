@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Tab2Service } from "./tab2.service";
 import { MenuController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -17,7 +18,9 @@ export class Tab2Page implements OnInit {
   
 
   constructor(private equipaService: Tab2Service,
-    private menuCtrl: MenuController) { }
+    private menuCtrl: MenuController
+    , private AlertController: AlertController, 
+    public navCtrl: NavController) { }
 
 
 
@@ -46,13 +49,21 @@ SelectStatus(status){
 
 getCurrentMatches(Liga, estado){
 
-  this.equipaService.getCurrentMatches(Liga, estado).subscribe(matches => this.matches = matches);
+  this.equipaService.getCurrentMatches(Liga, estado).subscribe(response => {this.matches = response},
+    error => { 
+      this.onIonError();
+    }
+  );
 
 }
 
 getCurrentTeams(Liga){
 
-  this.equipaService.getCurrentTeams(Liga).subscribe(teams => this.equipas = teams);
+  this.equipaService.getCurrentTeams(Liga).subscribe(response => {this.equipas = response},
+    error => { 
+      this.onIonError();
+    }
+  );
 }
 
 
@@ -71,6 +82,14 @@ closeMenu() {
 
 toggleMenu() {
   this.menuCtrl.toggle();
+}
+
+async onIonError(){
+  const errorAlert =await  this.AlertController.create({
+    message:"Não será possível carregar os dados da API nos próximos momentos",
+    buttons:[{text:"Fechar"}]
+  });
+  await errorAlert.present()
 }
 
 
